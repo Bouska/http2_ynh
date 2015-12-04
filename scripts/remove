@@ -1,0 +1,22 @@
+#!/bin/bash
+
+default_ciphersuite = "ALL:!aNULL:!eNULL:!LOW:!EXP:!RC4:!3DES:+HIGH:+MEDIUM"
+
+#Get all the domains
+domains=$(yunohost domain list | grep - | awk -F' ' '{print $2}')
+
+#Reverse modification on config files of all the domains
+for domain in $domain; do
+  sed -e 's/ssl http2;/ssl;/' /etc/nginx/conf.d/$domain.conf;
+  sed -e 's/ssl_ciphers .*$/ssl_ciphers $default_ciphersuite;/';
+done;
+
+#Downgrade nginx and openssl
+apt-get update -qq
+apt-get -y --force-yes install nginx-common=1.6.* nginx-extras=1.6.* openssl=1.0.1*
+
+#Remove Stretch's repo config
+rm /etc/apt/sources.list.d/stretch.list
+
+#Restart nginx
+service nginx restart
