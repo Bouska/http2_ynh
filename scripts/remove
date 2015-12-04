@@ -7,8 +7,8 @@ domains=$(sudo yunohost domain list | grep - | awk -F' ' '{print $2}')
 
 #Reverse modification on config files of all the domains
 for domain in $domains; do
-  sudo sed -e 's/ssl http2;/ssl;/' /etc/nginx/conf.d/$domain.conf;
-  sudo sed -e 's/ssl_ciphers .*$/ssl_ciphers $default_ciphersuite;/';
+  sudo sed -i 's/ssl http2;/ssl;/' /etc/nginx/conf.d/$domain.conf;
+  sudo sed -i 's/ssl_ciphers .*$/ssl_ciphers $default_ciphersuite;/' /etc/nginx/conf.d/$domain.conf;
 done;
 
 #Downgrade nginx and openssl

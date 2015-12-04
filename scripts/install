@@ -16,8 +16,8 @@ domains=$(sudo yunohost domain list | grep - | awk -F' ' '{print $2}')
 
 #Update config files of all the domains
 for domain in $domains; do
-  sudo sed -e 's/ssl;/ssl http2;/' /etc/nginx/conf.d/$domain.conf;
-  sudo sed -e 's/ssl_ciphers .*$/ssl_ciphers $ciphersuite;/';
+  sudo sed -i 's/ssl;/ssl http2;/' /etc/nginx/conf.d/$domain.conf;
+  sudo sed -i 's/ssl_ciphers .*$/ssl_ciphers $ciphersuite;/' /etc/nginx/conf.d/$domain.conf;
 done;
 
 #Restart nginx
