@@ -1,0 +1,17 @@
+{
+    "name": "Experimental HTTP2 support",
+    "id": "ynhhttp2",
+    "description": {
+        "en": "Enable HTTP2 support for all the Yunohost's domains. Backports ngnix and openssl packages from stretch."
+    },
+    "licence": "free",
+    "maintainer": {
+        "name": "Pablo Martin Gomez",
+        "email": "pablomg@eskapa.be",
+        "url": "https://github.com/Bouska/http2_ynh"
+    },
+    "multi_instance": "false",
+    "services": [
+        "nginx"
+    ]
+}
