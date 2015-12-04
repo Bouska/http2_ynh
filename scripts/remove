@@ -13,7 +13,7 @@ done;
 
 #Downgrade nginx and openssl
 sudo apt-get update -qq
-DEBIAN_FRONTEND=noninteractive sudo apt-get -y --force-yes install nginx-common=1.6.* nginx-extras=1.6.* openssl=1.0.1*
+sudo apt-get -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes install nginx-common=1.6.* nginx-extras=1.6.* openssl=1.0.1*
 
 #Remove Stretch's repo config
 sudo rm /etc/apt/sources.list.d/stretch.list

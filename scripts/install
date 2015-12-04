@@ -9,7 +9,7 @@ sudo mv stretch.list /etc/apt/sources.list.d/
 
 #Update nginx and openssl
 sudo apt-get update -qq
-DEBIAN_FRONTEND=noninteractive sudo apt-get --force-yes -y -t stretch install nginx-extras openssl
+sudo apt-get -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --force-yes -y -t stretch install nginx-extras openssl
 
 #Get all the domains
 domains=$(sudo yunohost domain list | grep - | awk -F' ' '{print $2}')
