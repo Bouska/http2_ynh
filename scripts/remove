@@ -5,6 +5,10 @@ default_ciphersuite="ALL:!aNULL:!eNULL:!LOW:!EXP:!RC4:!3DES:+HIGH:+MEDIUM"
 #Get all the domains
 domains=$(sudo yunohost domain list | grep - | awk -F' ' '{print $2}')
 
+#Reverse modification on config template file
+sudo sed -i 's/ssl http2;/ssl;/' /usr/share/yunohost/yunohost-config/nginx/template.conf;
+sudo sed -i "s/ssl_ciphers .*$/ssl_ciphers $default_ciphersuite;/" /usr/share/yunohost/yunohost-config/nginx/template.conf;
+
 #Reverse modification on config files of all the domains
 for domain in $domains; do
   sudo sed -i 's/ssl http2;/ssl;/' /etc/nginx/conf.d/$domain.conf;

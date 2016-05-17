@@ -14,6 +14,10 @@ sudo apt-get -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force
 #Get all the domains
 domains=$(sudo yunohost domain list | grep - | awk -F' ' '{print $2}')
 
+#Update config template file
+sudo sed -i 's/ssl;/ssl http2;/' /usr/share/yunohost/yunohost-config/nginx/template.conf;
+sudo sed -i "s/ssl_ciphers .*$/ssl_ciphers $ciphersuite;/" /usr/share/yunohost/yunohost-config/nginx/template.conf;
+
 #Update config files of all the domains
 for domain in $domains; do
   sudo sed -i 's/ssl;/ssl http2;/' /etc/nginx/conf.d/$domain.conf;
