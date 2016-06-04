@@ -21,7 +21,7 @@ sudo apt-get -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--forc
 
 #Remove Stretch's repo config
 sudo rm /etc/apt/sources.list.d/http2.list
-sudo rm /etc/apt/preferences.d/htt2
+sudo rm /etc/apt/preferences.d/http2
 
 #Restart nginx
 sudo service nginx restart
